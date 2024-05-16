@@ -1,0 +1,18 @@
+:root {
+  --main-bg-color: #32194a;
+  --secondary-color: #54F7A8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--main-bg-color);
+}
+
