@@ -1,15 +1,18 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import NotesService from "@/services/NotesService.js";
 
 export const useNotesStore = defineStore('notes', () => {
-  let id = 0;
+
   const notes = ref([])
-  notes.value.push({id: id++, title: "test note 1", content: "how dumb can a person with a bachelor be?"})
-  notes.value.push({id: id++, title: "test note 2", content: "super dumb!"})
   const currentNote = ref(null)
 
+  async function getNotes() {
+    notes.value = await NotesService.notes()
+  }
   function createNote() {
-    notes.value.push({id: id++, title: "New note", content: ""})
+    const id = Math.max(...notes.value.map(note => note.id))+1;
+    notes.value.push({id: id, title: "New note", content: ""})
   }
 
   function selectNote(note) {
@@ -23,5 +26,5 @@ export const useNotesStore = defineStore('notes', () => {
     notes.value = notes.value.filter(a => a !== note)
   }
 
-  return { notes, currentNote, createNote, selectNote, deleteNote }
+  return {notes, currentNote, createNote, selectNote, deleteNote, getNotes}
 })
