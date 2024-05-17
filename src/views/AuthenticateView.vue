@@ -7,8 +7,11 @@ const password = ref("")
 const response = ref("")
 
 async function register() {
-  const res = await AuthenticateService.register({email: email, password: password})
-  console.log(res)
+  try {
+    response.value = await AuthenticateService.register({email: email, password: password})
+  } catch (err) {
+    response.value = err.response.data.error
+  }
 }
 </script>
 
