@@ -3,6 +3,7 @@ import NotesList from "@/components/NotesList.vue";
 import NoteViewer from "@/components/NoteViewer.vue";
 import {useNotesStore} from "@/stores/notes.js";
 import {onMounted} from "vue";
+import Header from "@/components/Header.vue";
 
 onMounted(() => {
   const notesStore = useNotesStore();
@@ -11,6 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <Header />
   <main>
     <div class="content">
       <NotesList />
