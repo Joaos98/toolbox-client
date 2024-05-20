@@ -1,7 +1,7 @@
 <script setup>
   import {useNotesStore} from "@/stores/notes.js";
 
-  const props = defineProps({
+  defineProps({
     note: {}
   })
 
