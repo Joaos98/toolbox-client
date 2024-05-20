@@ -15,5 +15,8 @@
 .note-viewer-wrapper {
   width: 70%;
   padding: 20px;
+  color: white;
+  border-radius: 10px;
+  background-color: var(--purple3);
 }
 </style>

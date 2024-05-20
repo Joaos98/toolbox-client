@@ -19,7 +19,7 @@
 
 <style scoped>
 .notes-list-wrapper {
-  padding: 10px;
+  padding: 0 10px;
   width: 30%;
   display: flex;
   flex-direction: column;

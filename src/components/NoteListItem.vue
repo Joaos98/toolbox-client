@@ -31,7 +31,7 @@
   justify-content: space-between;
 
   .note-item-select {
-    background-color: #47246b;
+    background-color: var(--purple2);
     border-radius: 10px 0 0 10px;
     transition: 0.3s;
     padding: 20px 10px;
@@ -39,7 +39,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: #411a62
+      background-color: var(--purple3)
     }
   }
 

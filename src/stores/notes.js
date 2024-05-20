@@ -8,11 +8,15 @@ export const useNotesStore = defineStore('notes', () => {
   const currentNote = ref(null)
 
   async function getNotes() {
-    notes.value = await NotesService.notes()
+    notes.value = await NotesService.getNotes()
+    if (notes.value.length > 0) {
+      selectNote(notes.value[0])
+    }
   }
   function createNote() {
-    const id = Math.max(...notes.value.map(note => note.id))+1;
-    notes.value.push({id: id, title: "New note", content: ""})
+    const newNote = {title: "New note", content: ""}
+    notes.value.push(newNote)
+    selectNote(newNote)
   }
 
   function selectNote(note) {
