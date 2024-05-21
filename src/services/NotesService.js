@@ -8,5 +8,17 @@ export default {
             }
         })
         return notes.data
+    },
+
+    async createNote(note) {
+        return await Api().post("/notes", note)
+    },
+
+    async deleteNote(noteId) {
+        return await Api().delete("/notes", {params: {id: noteId}})
+    },
+
+    async updateNotes(notes) {
+        await Api().put("/notes", {notes: notes})
     }
 }

@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 import NotesService from "@/services/NotesService.js";
 
@@ -13,8 +13,11 @@ export const useNotesStore = defineStore('notes', () => {
       selectNote(notes.value[0])
     }
   }
-  function createNote() {
-    const newNote = {title: "New note", content: ""}
+  async function createNote() {
+    //TODO: Replace the userId with the userId from the authenticated user once authentication is finished
+    let newNote = {title: "Blank note", content: "", userId: 20}
+    const response = await NotesService.createNote(newNote)
+    newNote = response.data
     notes.value.push(newNote)
     selectNote(newNote)
   }
@@ -23,12 +26,18 @@ export const useNotesStore = defineStore('notes', () => {
     currentNote.value = note
   }
 
-  function deleteNote(note) {
-    if (currentNote.value === note) {
-      currentNote.value = null;
+  async function deleteNote(note) {
+    const response = await NotesService.deleteNote(note.id)
+    if (response.status === 200) {
+      location.reload()
     }
-    notes.value = notes.value.filter(a => a !== note)
   }
 
-  return {notes, currentNote, createNote, selectNote, deleteNote, getNotes}
+  async function updateNotes() {
+    await NotesService.updateNotes(notes.value)
+    location.reload()
+  }
+
+
+  return {notes, currentNote, createNote, selectNote, deleteNote, getNotes, updateNotes}
 })

@@ -5,8 +5,9 @@ import {useNotesStore} from "@/stores/notes.js";
 import {onMounted} from "vue";
 import Header from "@/components/Header.vue";
 
+let notesStore
 onMounted(() => {
-  const notesStore = useNotesStore();
+  notesStore = useNotesStore();
   notesStore.getNotes()
 });
 </script>
@@ -14,17 +15,24 @@ onMounted(() => {
 <template>
   <Header />
   <main>
-    <div class="content">
+    <div class="notesListAndViewer">
       <NotesList />
       <NoteViewer />
+    </div>
+    <div class="saveButton">
+      <BButton @click="notesStore.updateNotes()">Save all notes</BButton>
     </div>
   </main>
 </template>
 
 <style scoped>
-.content {
+.notesListAndViewer {
   display: flex;
   width: 100%;
   min-height: 50vh;
+}
+.saveButton {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

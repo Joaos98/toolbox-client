@@ -6,8 +6,8 @@
 
 <template>
   <div class="note-viewer-wrapper" v-if="notesStore.currentNote != null">
-    <h2>{{notesStore.currentNote.title}}</h2>
-    <p>{{notesStore.currentNote.content}}</p>
+    <input type="text" v-model="notesStore.currentNote.title">
+    <textarea v-model="notesStore.currentNote.content"/>
   </div>
 </template>
 
