@@ -1,13 +1,25 @@
 <script setup>
 import {ref} from "vue";
 import RegisterModal from "@/components/AuthenticateComponents/RegisterModal.vue";
+import AuthenticateService from "@/services/AuthenticateService.js";
 
 const email = ref("")
 const password = ref("")
+const response = ref("")
+const error = ref("")
 const modal = ref(false)
 
-function login() {
-
+async function login() {
+  try {
+    const credentials = {
+      email: email.value,
+      password: password.value
+    }
+    response.value = await AuthenticateService.login(credentials)
+    error.value = ""
+  } catch (err) {
+    error.value = err.response.data.error
+  }
 }
 </script>
 
@@ -27,6 +39,8 @@ function login() {
       <BModal :hide-footer="true" v-model="modal" title="Create an account">
         <RegisterModal/>
       </BModal>
+    <p v-if="error">{{error}}</p>
+    <p v-if="response">{{response}}</p>
   </div>
 </template>
 

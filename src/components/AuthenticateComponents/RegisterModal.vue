@@ -13,7 +13,6 @@ async function register() {
       email: email.value,
       password: password.value
     }
-    console.log(credentials)
     response.value = await AuthenticateService.register(credentials)
     error.value = ""
   } catch (err) {
@@ -38,10 +37,8 @@ async function register() {
       </ul>
     </div>
     <BButton type="button" @click="register()">Register</BButton>
-    <p>
-      <p v-if="error">{{error}}</p>
-      <p v-if="response">Your account has been created, you may now log in!</p>
-    </p>
+    <p v-if="error">{{error}}</p>
+    <p v-if="response">Your account has been created, you may now log in!</p>
   </form>
 </template>
 

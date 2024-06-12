@@ -15,7 +15,7 @@ export const useNotesStore = defineStore('notes', () => {
   }
   async function createNote() {
     //TODO: Replace the userId with the userId from the authenticated user once authentication is finished
-    let newNote = {title: "Blank note", content: "", userId: 20}
+    let newNote = {title: "Blank note", content: "", userId: 1}
     const response = await NotesService.createNote(newNote)
     newNote = response.data
     notes.value.push(newNote)

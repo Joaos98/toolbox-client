@@ -2,9 +2,10 @@ import Api from "@/services/api.js"
 
 export default {
     async getNotes() {
+        //TODO: Replace the userId with the userId from the authenticated user once authentication is finished
         const notes = await Api().get("/notes", {
             params: {
-                userId: 20
+                userId: 1
             }
         })
         return notes.data
