@@ -1,6 +1,6 @@
-# notes
+# toolbox-client
 
-Notes app
+Joao's Toolbox Client App
 
 ## Project Setup
 
