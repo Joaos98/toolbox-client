@@ -1,8 +1,11 @@
 :root {
-  --main-bg-color: #32194a;
-  --purple2: #47246b;
-  --purple3: #411a62;
-  --secondary-color: #54F7A8;
+  --main-bg-color: #1f1f1f;
+  --bg-lighter1: #313131;
+  --bg-lighter2: #4d4d4d;
+  --bg-darker1: #181818;
+  --bg-darker2: #151515;
+  --bg-darker3: #161616;
+  --secondary-color: #05D9FF;
 }
 
 *,

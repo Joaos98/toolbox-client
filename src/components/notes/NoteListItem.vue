@@ -31,7 +31,7 @@
   justify-content: space-between;
 
   .note-item-select {
-    background-color: var(--purple2);
+    background-color: var(--bg-lighter1);
     border-radius: 10px 0 0 10px;
     transition: 0.3s;
     padding: 20px 10px;
@@ -39,14 +39,14 @@
 
     &:hover {
       cursor: pointer;
-      background-color: var(--purple3)
+      background-color: var(--bg-lighter2)
     }
   }
 
   .delete-note {
     border-radius: 0 10px 10px 0;
     width: 30px;
-    background-color: #36214b;
+    background-color: var(--bg-darker2);
     transition: 0.3s;
     display: flex;
     justify-content: center;
@@ -54,7 +54,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: #792024ab;
+      background-color: rgba(121, 28, 32, 0.67);
     }
   }
 }

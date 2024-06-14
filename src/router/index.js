@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import NotesHomeView from '@/views/notes/HomeView.vue'
 import AuthenticateView from "@/views/AuthenticateView.vue";
 
 const router = createRouter({
@@ -13,6 +14,10 @@ const router = createRouter({
       path: '/authenticate',
       name: 'authenticate',
       component: AuthenticateView
+    }, {
+      path: '/notes',
+      name: 'notes',
+      component: NotesHomeView
     }
   ]
 })

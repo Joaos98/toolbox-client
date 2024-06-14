@@ -2,6 +2,7 @@
 import {ref} from "vue";
 import RegisterModal from "@/components/AuthenticateComponents/RegisterModal.vue";
 import AuthenticateService from "@/services/AuthenticateService.js";
+import Header from "@/components/Header.vue";
 
 const email = ref("")
 const password = ref("")
@@ -24,6 +25,7 @@ async function login() {
 </script>
 
 <template>
+  <Header page-title="Authenticate"/>
   <div>
     <h1>
       Login

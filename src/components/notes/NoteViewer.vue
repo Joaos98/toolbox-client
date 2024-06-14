@@ -17,6 +17,6 @@
   padding: 20px;
   color: white;
   border-radius: 10px;
-  background-color: var(--purple3);
+  background-color: var(--bg-lighter1);
 }
 </style>

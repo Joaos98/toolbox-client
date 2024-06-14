@@ -1,38 +1,39 @@
 <script setup>
-import NotesList from "@/components/NotesList.vue";
-import NoteViewer from "@/components/NoteViewer.vue";
-import {useNotesStore} from "@/stores/notes.js";
-import {onMounted} from "vue";
 import Header from "@/components/Header.vue";
-
-let notesStore
-onMounted(() => {
-  notesStore = useNotesStore();
-  notesStore.getNotes()
-});
 </script>
 
 <template>
-  <Header />
+  <Header/>
   <main>
-    <div class="notesListAndViewer">
-      <NotesList />
-      <NoteViewer />
-    </div>
-    <div class="saveButton">
-      <BButton @click="notesStore.updateNotes()">Save all notes</BButton>
+    <div class="appDrawer">
+      <router-link class="app" to="/notes">Notes</router-link>
     </div>
   </main>
 </template>
 
 <style scoped>
-.notesListAndViewer {
-  display: flex;
-  width: 100%;
-  min-height: 50vh;
+.appDrawer {
+  padding: 20px;
+
+  .app {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      box-shadow: 0 0 11px rgba(255, 255, 255, 0.5);
+    }
+  }
 }
-.saveButton {
-  display: flex;
-  justify-content: flex-end;
-}
+
 </style>

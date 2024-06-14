@@ -1,5 +1,5 @@
 <script setup>
-  import NoteListItem from "@/components/NoteListItem.vue";
+  import NoteListItem from "@/components/notes/NoteListItem.vue";
   import {useNotesStore} from "@/stores/notes.js";
 
   const notesStore = useNotesStore()
@@ -19,7 +19,7 @@
 
 <style scoped>
 .notes-list-wrapper {
-  padding: 0 10px;
+  padding: 0 10px 0 0;
   width: 30%;
   display: flex;
   flex-direction: column;
@@ -27,6 +27,7 @@
   min-height: 40vh;
 
   .notes-list {
+    padding: 0;
     list-style: none;
   }
 
@@ -35,14 +36,15 @@
     border: 0;
     width: 50px;
     height: 50px;
-    background-color: #411a62;
+    background-color: var(--bg-lighter1);
     transition: 0.3s;
     color: white;
     align-self: end;
 
     &:hover {
       cursor: pointer;
-      background-color: #54F7A8;
+      background-color: var(--secondary-color);
+      color: black;
     }
   }
 }

@@ -1,17 +1,27 @@
-<script setup lang="ts">
-
+<script setup>
 import {RouterLink} from "vue-router";
+defineProps(['pageTitle'])
 </script>
 
 <template>
   <header>
     <div class="wrapper">
       <nav>
-          <RouterLink class="notes-link" to="/">
-            <h1 class="notes-title">
-              Notes
+        <div class="linkWrapper">
+          <RouterLink class="routerLink" to="/">
+            <h1 class="title">
+              Joao's Toolbox
             </h1>
           </RouterLink>
+        </div>
+        <div class="linkWrapper centerLinkWrapper" v-if="pageTitle">
+            <h1 class="title">
+              {{ pageTitle }}
+            </h1>
+        </div>
+        <div class="linkWrapper">
+
+        </div>
       </nav>
     </div>
   </header>
@@ -19,22 +29,42 @@ import {RouterLink} from "vue-router";
 
 <style scoped lang="scss">
 .wrapper {
-  height: 20vh;
+  background-color: var(--bg-darker3);
+  height: 10vh;
   display: flex;
   align-items: center;
+  margin-bottom: 5vh;
+  padding: 0 20px;
 
-  .notes-link {
-    color: #54F7A8;
-    text-decoration: none;
+  nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 
-    .notes-title {
-      width: fit-content;
-      padding: 10px;
-      transition: 0.3s;
-      border-radius: 10px;
+    .centerLinkWrapper {
+      display: flex;
+      justify-content: center;
+    }
 
-      &:hover {
-        background-color: #53307963;
+    .linkWrapper {
+      flex: 1;
+
+      .routerLink {
+        display: inline-block;
+        width: fit-content;
+        text-decoration: none;
+        transition: 0.3s;
+        border-radius: 10px;
+
+        &:hover {
+          text-shadow: 0 0 20px #adadad;
+        }
+      }
+
+      .title {
+        color: var(--secondary-color);
+        width: fit-content;
+        padding: 10px;
       }
     }
   }
