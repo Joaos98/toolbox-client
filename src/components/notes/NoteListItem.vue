@@ -11,7 +11,7 @@
 <template>
   <li class="note-item">
     <div class="note-item-select" @click="notesStore.selectNote(note)">
-      <span>
+      <span class="noteTitleSpan">
         {{note.title}}
       </span>
     </div>
@@ -36,10 +36,17 @@
     transition: 0.3s;
     padding: 20px 10px;
     flex: 1;
+    display: flex;
 
     &:hover {
       cursor: pointer;
       background-color: var(--bg-lighter2)
+    }
+
+    .noteTitleSpan {
+      flex-grow: 1;
+      width: 0;
+      word-break: break-word;
     }
   }
 
