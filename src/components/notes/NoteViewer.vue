@@ -5,9 +5,12 @@
 </script>
 
 <template>
-  <div class="note-viewer-wrapper" v-if="notesStore.currentNote != null">
-    <input placeholder="Note Title" type="text" class="noteTitle" v-model="notesStore.currentNote.title">
-    <textarea class="noteContent" v-model="notesStore.currentNote.content"/>
+  <div class="note-viewer-wrapper">
+    <input  v-if="notesStore.currentNote != null" placeholder="Note Title" type="text" class="noteTitle" v-model="notesStore.currentNote.title">
+    <textarea v-if="notesStore.currentNote != null" class="noteContent" v-model="notesStore.currentNote.content"/>
+    <span v-if="notesStore.currentNote == null">
+      Select a note to view and edit it's content
+    </span>
   </div>
 </template>
 
@@ -20,6 +23,9 @@
   background-color: var(--bg-lighter1);
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
 
   .noteTitle {
     border: none;
@@ -29,6 +35,7 @@
     margin-bottom: 10px;
     line-height: 3em;
     color: white;
+    width: 100%;
 
     &:focus {
       outline: none;
@@ -45,6 +52,7 @@
     height: 100%;
     resize: none;
     color: white;
+    width: 100%;
 
     &:focus {
       outline: none;

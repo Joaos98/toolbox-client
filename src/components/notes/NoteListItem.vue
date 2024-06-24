@@ -27,6 +27,8 @@
   margin-bottom: 10px;
   color: white;
   width: 100%;
+  min-height: 64px;
+  scrollbar-gutter: stable;
   display: flex;
   justify-content: space-between;
 
@@ -47,6 +49,10 @@
       flex-grow: 1;
       width: 0;
       word-break: break-word;
+    }
+
+    .noteTitleSpan:empty:before {
+      content: "\200b"; // unicode zero width space character
     }
   }
 

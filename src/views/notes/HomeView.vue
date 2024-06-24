@@ -28,6 +28,8 @@ onMounted(() => {
 <style scoped>
 .wrapper {
   padding: 0 3%;
+  display: flex;
+  flex-direction: column;
 
   .notesListAndViewer {
     display: flex;
@@ -42,7 +44,7 @@ onMounted(() => {
     .saveButton {
       background-color: var(--bg-lighter1);
       border: 1px solid var(--bg-darker2);
-      transition: 0.5s;
+      transition: 0.3s;
 
       &:hover {
         background-color: var(--secondary-color);

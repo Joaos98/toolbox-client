@@ -3,4 +3,26 @@
 #app {
   margin: 0 auto;
   font-weight: normal;
+
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-lighter1) var(--bg-darker1);
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #4d4d4d;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #161616;
+    border-radius: 10px;
+    border: 3px none #ffffff;
+  }
 }
