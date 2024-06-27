@@ -1,11 +1,12 @@
 import Api from "@/services/api.js"
+import {useAuthStore} from "@/stores/authentication.js";
 
 export default {
     async getNotes() {
-        //TODO: Replace the userId with the userId from the authenticated user once authentication is finished
+        const authStore = useAuthStore()
         const notes = await Api().get("/notes", {
             params: {
-                userId: 1
+                userId: authStore.user.id
             }
         })
         return notes.data

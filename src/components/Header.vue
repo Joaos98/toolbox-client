@@ -1,5 +1,16 @@
 <script setup>
 import {RouterLink} from "vue-router";
+import {useAuthStore} from "@/stores/authentication.js";
+import router from "@/router/index.js";
+
+const authStore = useAuthStore()
+
+function logOut() {
+  authStore.token = null
+  authStore.user = null
+  authStore.isUserLoggedIn = false
+  router.push({name: 'authenticate'})
+}
 defineProps(['pageTitle'])
 </script>
 
@@ -14,13 +25,15 @@ defineProps(['pageTitle'])
             </h1>
           </RouterLink>
         </div>
-        <div class="linkWrapper centerLinkWrapper" v-if="pageTitle">
-            <h1 class="title">
+        <div class="linkWrapper centerLinkWrapper">
+            <h1 class="title" v-if="pageTitle">
               {{ pageTitle }}
             </h1>
         </div>
-        <div class="linkWrapper">
-
+        <div class="linkWrapper logOutLinkWrapper">
+          <button v-if="authStore.user" class="logOutButton routerLink"  @click="logOut">
+            Log Out
+          </button>
         </div>
       </nav>
     </div>
@@ -44,6 +57,16 @@ defineProps(['pageTitle'])
     .centerLinkWrapper {
       display: flex;
       justify-content: center;
+    }
+    .logOutLinkWrapper {
+      display: flex;
+      justify-content: flex-end;
+
+      .logOutButton {
+        background-color: transparent;
+        border: none;
+        color: var(--secondary-color);
+      }
     }
 
     .linkWrapper {

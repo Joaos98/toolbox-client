@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import NotesHomeView from '@/views/notes/HomeView.vue'
 import AuthenticateView from "@/views/AuthenticateView.vue";
+import {useAuthStore} from "@/stores/authentication.js";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,5 +22,18 @@ const router = createRouter({
     }
   ]
 })
+
+router.beforeEach(async (to) => {
+  const publicPages = ['/authenticate'];
+  const authRequired = !publicPages.includes(to.path);
+  const authStore = useAuthStore();
+
+  if (authRequired && !authStore.user) {
+    return '/authenticate';
+  }
+  if (authStore.user && to.path === '/authenticate') {
+    return '/'
+  }
+});
 
 export default router
