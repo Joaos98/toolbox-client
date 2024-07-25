@@ -9,5 +9,20 @@ export default {
     async login(credentials) {
         const response = await Api().post(`${this.BASE_URL}/login`, credentials)
         return response.data
+    },
+    async checkToken(tokenValue) {
+        try {
+            const token = 'Bearer ' + tokenValue;
+            const response = await Api().get(`${this.BASE_URL}/verify`, {
+                headers: {
+                    Authorization: token
+                }
+            })
+            if (response.status === 200) {
+                return true
+            }
+        } catch (error) {
+            return false
+        }
     }
 }

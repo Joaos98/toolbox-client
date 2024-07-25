@@ -22,9 +22,8 @@ async function login() {
     }
     response.value = await AuthenticateService.login(credentials)
     if (response.value.token) {
-      authStore.token = response.value.token;
-      authStore.user = response.value.user;
-      authStore.isUserLoggedIn = true;
+      authStore.setToken(response.value.token)
+      authStore.setUser(response.value.user)
       await router.push({path: '/'})
     }
     error.value = ""

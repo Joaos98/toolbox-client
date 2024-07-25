@@ -28,11 +28,18 @@ router.beforeEach(async (to) => {
   const authRequired = !publicPages.includes(to.path);
   const authStore = useAuthStore();
 
-  if (authRequired && !authStore.user) {
-    return '/authenticate';
+  let isAuthenticated = false;
+  if (authStore.token) {
+    isAuthenticated = await authStore.checkToken()
   }
-  if (authStore.user && to.path === '/authenticate') {
-    return '/'
+  if (authRequired) {
+    if (!isAuthenticated) {
+      return '/authenticate';
+    }
+  } else {
+    if (isAuthenticated) {
+      return '/'
+    }
   }
 });
 

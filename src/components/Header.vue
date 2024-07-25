@@ -6,9 +6,7 @@ import router from "@/router/index.js";
 const authStore = useAuthStore()
 
 function logOut() {
-  authStore.token = null
-  authStore.user = null
-  authStore.isUserLoggedIn = false
+  authStore.logout();
   router.push({name: 'authenticate'})
 }
 defineProps(['pageTitle'])
