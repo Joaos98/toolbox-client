@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import NotesHomeView from '@/views/notes/HomeView.vue'
+import FitnessHomeView from '@/views/fitnessTracker/HomeView.vue'
 import AuthenticateView from "@/views/AuthenticateView.vue";
 import {useAuthStore} from "@/stores/authentication.js";
 
@@ -19,6 +20,10 @@ const router = createRouter({
       path: '/notes',
       name: 'notes',
       component: NotesHomeView
+    }, {
+      path: '/fitness',
+      name: 'fitness',
+      component: FitnessHomeView
     }
   ]
 })

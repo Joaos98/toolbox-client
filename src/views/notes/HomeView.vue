@@ -13,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Header page-title="Notes" page-route="/notes"/>
+  <Header page-title="Notes"/>
   <main class="wrapper">
     <div class="notesListAndViewer">
       <NotesList />
