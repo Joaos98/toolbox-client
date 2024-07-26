@@ -1,16 +1,32 @@
 <script setup>
 import Header from "@/components/Header.vue";
+import {onMounted, ref} from "vue";
+import NewWorkoutModal from "@/components/FitnessComponents/NewWorkoutModal.vue";
+import {useFitnessStore} from "@/stores/fitness.js";
 
+const modal = ref(false)
 function tooltip(value) {
   let options = { year: 'numeric', month: 'long', day: 'numeric' };
   let dateString = value.date.toLocaleString('en-US', options)
   switch (value.count) {
     case 1:
-      return 'You did a different exercise on ' + dateString
+      return 'You had a different workout on ' + dateString
     case 2:
       return 'You went to the gym on ' + dateString
   }
 }
+
+const workouts = ref([])
+
+let fitnessStore
+onMounted(async () => {
+  fitnessStore = useFitnessStore();
+  await fitnessStore.getWorkouts()
+  workouts.value = fitnessStore.workouts.map(workout => {
+    const date = new Date(workout.date)
+    return {date: new Date( date.getTime() - date.getTimezoneOffset() * -60000 ), count: workout.type}
+  })
+});
 </script>
 
 <template>
@@ -19,16 +35,16 @@ function tooltip(value) {
     <div class="workout">
       <div class="new-workout">
         <h3>Workouts</h3>
-        <button>+</button>
+        <button @click="modal = !modal">+</button>
       </div>
       <CalendarHeatmap class="heatmap"
                        vertical
-                       :values="[{ date: '2024-7-25', count: 1 }, { date: '2024-7-24', count: 2 }]"
+                       :values="workouts"
                        :end-date="new Date()"
                        :round="2"
                        :max="3"
                        :tooltip-formatter="tooltip"
-                       :no-data-text="'You didn\'t exercise on this day'"
+                       :no-data-text="'You didn\'t workout on this day'"
                        :range-color="['#373737', '#373737', '#60a9559e', '#36b923']"
       />
     </div>
@@ -36,6 +52,11 @@ function tooltip(value) {
       NUTRITION
     </div>
   </div>
+  <BModal :hide-footer="true"
+          v-model="modal"
+          title="New Workout">
+    <NewWorkoutModal/>
+  </BModal>
 </template>
 
 <style scoped>

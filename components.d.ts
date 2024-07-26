@@ -9,8 +9,13 @@ declare module 'vue' {
   export interface GlobalComponents {
     BAlert: typeof import('bootstrap-vue-next')['BAlert']
     BButton: typeof import('bootstrap-vue-next')['BButton']
+    BFormGroup: typeof import('bootstrap-vue-next')['BFormGroup']
+    BFormInput: typeof import('bootstrap-vue-next')['BFormInput']
+    BFormInvalidFeedback: typeof import('bootstrap-vue-next')['BFormInvalidFeedback']
+    BFormRadioGroup: typeof import('bootstrap-vue-next')['BFormRadioGroup']
     BModal: typeof import('bootstrap-vue-next')['BModal']
     Header: typeof import('./src/components/Header.vue')['default']
+    NewWorkoutModal: typeof import('./src/components/FitnessComponents/NewWorkoutModal.vue')['default']
     NoteListItem: typeof import('./src/components/notes/NoteListItem.vue')['default']
     NotesList: typeof import('./src/components/notes/NotesList.vue')['default']
     NoteViewer: typeof import('./src/components/notes/NoteViewer.vue')['default']
