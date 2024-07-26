@@ -21,3 +21,18 @@ body {
   background-color: var(--main-bg-color);
 }
 
+.toolbox-button {
+  color: white;
+  text-align: center;
+  padding: 7px;
+  background-color: var(--bg-lighter1);
+  border: 1px solid var(--bg-darker2);
+  border-radius: 10px;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: var(--secondary-color);
+    color: black;
+  }
+}
+

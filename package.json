@@ -22,10 +22,13 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@iconify-json/bi": "^1.1.23",
+    "@iconify-json/ic": "^1.1.17",
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/compiler-sfc": "^3.4.34",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
     "@vue/tsconfig": "^0.5.1",
@@ -35,7 +38,8 @@
     "prettier": "^3.2.5",
     "tippy.js": "^6.3.7",
     "typescript": "~5.4.0",
-    "unplugin-vue-components": "^0.27.0",
+    "unplugin-icons": "^0.19.0",
+    "unplugin-vue-components": "^0.27.3",
     "vite": "^5.2.8",
     "vue-tsc": "^2.0.11",
     "vue3-calendar-heatmap": "^2.0.5"

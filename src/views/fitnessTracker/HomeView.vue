@@ -4,7 +4,8 @@ import {onMounted, ref} from "vue";
 import NewWorkoutModal from "@/components/FitnessComponents/NewWorkoutModal.vue";
 import {useFitnessStore} from "@/stores/fitness.js";
 
-const modal = ref(false)
+const newWorkoutModal = ref(false)
+const editWorkoutsModal = ref(false)
 function tooltip(value) {
   let options = { year: 'numeric', month: 'long', day: 'numeric' };
   let dateString = value.date.toLocaleString('en-US', options)
@@ -35,7 +36,7 @@ onMounted(async () => {
     <div class="workout">
       <div class="new-workout">
         <h3>Workouts</h3>
-        <button @click="modal = !modal">+</button>
+        <button class="new-workout-button" @click="newWorkoutModal = !newWorkoutModal">+</button>
       </div>
       <CalendarHeatmap class="heatmap"
                        vertical
@@ -47,15 +48,21 @@ onMounted(async () => {
                        :no-data-text="'You didn\'t workout on this day'"
                        :range-color="['#373737', '#373737', '#60a9559e', '#36b923']"
       />
+      <button class="toolbox-button edit-workouts-button" @click="editWorkoutsModal = !editWorkoutsModal">Edit workouts</button>
     </div>
     <div class="nutrition">
       NUTRITION
     </div>
   </div>
   <BModal :hide-footer="true"
-          v-model="modal"
+          v-model="newWorkoutModal"
           title="New Workout">
     <NewWorkoutModal/>
+  </BModal>
+  <BModal :hide-footer="true"
+          v-model="editWorkoutsModal"
+          title="Edit Workouts">
+    <EditWorkoutsModal/>
   </BModal>
 </template>
 
@@ -74,7 +81,7 @@ onMounted(async () => {
     padding: 10px;
     border-radius: 10px;
 
-    button {
+    .new-workout-button {
       margin-left: 5px;
       color: white;
       width: 40px;
@@ -90,6 +97,10 @@ onMounted(async () => {
         background-color: var(--secondary-color);
         color: black;
       }
+    }
+
+    .edit-workouts-button {
+      margin-top: 10px;
     }
 
     h3 {

@@ -22,6 +22,10 @@ async function newWorkout() {
     error.value = "Please choose a workout type!"
     return;
   }
+  if (date.value == null) {
+    error.value = "Please select a date!"
+    return;
+  }
   try {
     const workoutData = {
       type: type.value,
@@ -55,7 +59,7 @@ async function newWorkout() {
                      :format="formatDate"
                      required/>
     </b-form-group>
-    <button type="button" class="newWorkoutButton" @click="newWorkout()">Create</button>
+    <button type="button" class="toolbox-button" @click="newWorkout()">Create</button>
     <BAlert class="errorAlert" v-model="error" variant="danger" dismissible fade>
       {{ error }}
     </BAlert>
@@ -70,21 +74,6 @@ async function newWorkout() {
   .col, .col-auto {
     align-content: center;
     padding: 5px;
-  }
-
-  .newWorkoutButton {
-    color: white;
-    text-align: center;
-    padding: 7px;
-    background-color: var(--bg-lighter1);
-    border: 1px solid var(--bg-darker2);
-    border-radius: 10px;
-    transition: 0.3s;
-
-    &:hover {
-      background-color: var(--secondary-color);
-      color: black;
-    }
   }
 
   .errorAlert {

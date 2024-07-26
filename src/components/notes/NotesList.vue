@@ -14,7 +14,7 @@
       </span>
       <NoteListItem v-for="note in notesStore.notes" :key="note.id" :note="note"/>
     </ul>
-    <button type="button" class="new-note-button" @click="notesStore.createNote()">
+    <button type="button" class="toolbox-button" @click="notesStore.createNote()">
       New Note
     </button>
   </div>
@@ -48,23 +48,6 @@
     align-items: center;
     display: flex;
     height: 100%;
-  }
-
-  .new-note-button {
-    color: white;
-    text-align: center;
-    width: 100%;
-    justify-content: space-between;
-    border-radius: 10px;
-    padding: 20px 10px;
-    background-color: var(--bg-lighter1);
-    border: 1px solid var(--bg-darker2);
-    transition: 0.3s;
-
-    &:hover {
-      background-color: var(--secondary-color);
-      color: black;
-    }
   }
 }
 
