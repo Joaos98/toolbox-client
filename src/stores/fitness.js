@@ -6,6 +6,8 @@ import FitnessService from "@/services/FitnessService.js";
 export const useFitnessStore = defineStore('fitness', () => {
 
     const workouts = ref([])
+    const bodyCompositionMeasurements = ref([])
+    const userMeasurementParameters = ref({})
 
     async function getWorkouts() {
         workouts.value = await FitnessService.getWorkouts()
@@ -26,6 +28,33 @@ export const useFitnessStore = defineStore('fitness', () => {
         }
     }
 
+    async function getBodyCompositionMeasurements() {
+        bodyCompositionMeasurements.value = await FitnessService.getBodyCompositionMeasurements()
+    }
 
-    return {workouts, getWorkouts, createWorkout, deleteWorkout}
+    async function createBodyCompositionMeasurements(measurements) {
+        const authStore = useAuthStore()
+        measurements.userId = authStore.user.id
+        const response = await FitnessService.createBodyCompositionMeasurements(measurements)
+        if (response.status === 200) {
+            location.reload()
+        }
+    }
+
+    async function deleteBodyCompositionMeasurements(measurement) {
+        const response = await FitnessService.deleteBodyCompositionMeasurements(measurement.id)
+        if (response.status === 200) {
+            location.reload()
+        }
+    }
+
+    async function getUserMeasurementParameters() {
+        userMeasurementParameters.value = await FitnessService.getUserMeasurementParameters()
+    }
+
+    return {
+        workouts, getWorkouts, createWorkout, deleteWorkout,
+        bodyCompositionMeasurements, createBodyCompositionMeasurements, getBodyCompositionMeasurements, deleteBodyCompositionMeasurements,
+        userMeasurementParameters, getUserMeasurementParameters
+    }
 })

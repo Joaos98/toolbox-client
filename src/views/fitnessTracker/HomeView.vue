@@ -3,9 +3,15 @@ import Header from "@/components/Header.vue";
 import {onMounted, ref} from "vue";
 import NewWorkoutModal from "@/components/FitnessComponents/NewWorkoutModal.vue";
 import {useFitnessStore} from "@/stores/fitness.js";
+import NewBodyCompositionMeasurementsModal
+  from "@/components/FitnessComponents/NewBodyCompositionMeasurementsModal.vue";
+import EditBodyCompositionMeasurementsModal
+  from "@/components/FitnessComponents/EditBodyCompositionMeasurementsModal.vue";
 
 const newWorkoutModal = ref(false)
 const editWorkoutsModal = ref(false)
+const newBodyMeasurementsModal = ref(false)
+const editBodyMeasurementsModal = ref(false)
 function tooltip(value) {
   let options = { year: 'numeric', month: 'long', day: 'numeric' };
   let dateString = value.date.toLocaleString('en-US', options)
@@ -19,10 +25,11 @@ function tooltip(value) {
 
 const workouts = ref([])
 
-let fitnessStore
+let fitnessStore = useFitnessStore();
 onMounted(async () => {
-  fitnessStore = useFitnessStore();
   await fitnessStore.getWorkouts()
+  await fitnessStore.getBodyCompositionMeasurements()
+  await fitnessStore.getUserMeasurementParameters()
   workouts.value = fitnessStore.workouts.map(workout => {
     const date = new Date(workout.date)
     return {date: new Date( date.getTime() - date.getTimezoneOffset() * -60000 ), count: workout.type}
@@ -36,7 +43,7 @@ onMounted(async () => {
     <div class="workout">
       <div class="new-workout">
         <h3>Workouts</h3>
-        <button class="new-workout-button" @click="newWorkoutModal = !newWorkoutModal">+</button>
+        <button class="round-button" @click="newWorkoutModal = !newWorkoutModal">+</button>
       </div>
       <CalendarHeatmap class="heatmap"
                        vertical
@@ -51,7 +58,21 @@ onMounted(async () => {
       <button class="toolbox-button edit-workouts-button" @click="editWorkoutsModal = !editWorkoutsModal">Edit workouts</button>
     </div>
     <div class="nutrition">
-      NUTRITION
+      <div class="nutritionHeader">
+        <div></div>
+        <h3>Body Composition</h3>
+        <div>
+          <button class="round-button" @click="newBodyMeasurementsModal = !newBodyMeasurementsModal">+</button>
+          <button class="round-button" @click="editBodyMeasurementsModal = !editBodyMeasurementsModal">
+            <IMdiEdit class="deleteIcon"/>
+          </button>
+        </div>
+      </div>
+      <ul>
+        <li v-for="measurement in fitnessStore.bodyCompositionMeasurements" :key="measurement.id">
+          {{ measurement.bodyFat }}
+        </li>
+      </ul>
     </div>
   </div>
   <BModal :hide-footer="true"
@@ -64,6 +85,16 @@ onMounted(async () => {
           title="Edit Workouts">
     <EditWorkoutsModal/>
   </BModal>
+  <BModal :hide-footer="true"
+          v-model="newBodyMeasurementsModal"
+          title="New Body Composition Measurements">
+    <NewBodyCompositionMeasurementsModal/>
+  </BModal>
+  <BModal :hide-footer="true"
+          v-model="editBodyMeasurementsModal"
+          title="Edit Body Composition Measurements">
+    <EditBodyCompositionMeasurementsModal/>
+  </BModal>
 </template>
 
 <style scoped>
@@ -74,6 +105,29 @@ onMounted(async () => {
   color: white;
   margin-bottom: 30px;
 
+  h3 {
+    color: var(--secondary-color);
+    text-align: center;
+  }
+
+  .round-button {
+    margin-left: 5px;
+    color: white;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    padding: 7px;
+    background-color: var(--bg-lighter1);
+    border: 1px solid var(--bg-darker2);
+    border-radius: 50%;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: var(--secondary-color);
+      color: black;
+    }
+  }
+
   .workout {
     display: flex;
     flex-direction: column;
@@ -81,31 +135,8 @@ onMounted(async () => {
     padding: 10px;
     border-radius: 10px;
 
-    .new-workout-button {
-      margin-left: 5px;
-      color: white;
-      width: 40px;
-      height: 40px;
-      text-align: center;
-      padding: 7px;
-      background-color: var(--bg-lighter1);
-      border: 1px solid var(--bg-darker2);
-      border-radius: 50%;
-      transition: 0.3s;
-
-      &:hover {
-        background-color: var(--secondary-color);
-        color: black;
-      }
-    }
-
     .edit-workouts-button {
       margin-top: 10px;
-    }
-
-    h3 {
-      color: var(--secondary-color);
-      text-align: center;
     }
 
     .heatmap {
@@ -123,6 +154,17 @@ onMounted(async () => {
 
   .nutrition {
     display: flex;
+    margin-left: 40px;
+    flex-direction: column;
+    background-color: var(--bg-darker1);
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+
+    .nutritionHeader {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 </style>
