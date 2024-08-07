@@ -3,7 +3,10 @@
 import {useFitnessStore} from "@/stores/fitness.js";
 
 const fitnessStore = useFitnessStore()
-
+function getReadableDate(date) {
+  let options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleString('en-US', options)
+}
 </script>
 
 <template>
@@ -19,8 +22,8 @@ const fitnessStore = useFitnessStore()
       </BTr>
     </BThead>
     <BTbody>
-      <BTr v-for="measurement in fitnessStore.bodyCompositionMeasurements.reverse()" :key="measurement.id">
-        <BTd>{{measurement.date}}</BTd>
+      <BTr v-for="measurement in fitnessStore.bodyCompositionMeasurements" :key="measurement.id">
+        <BTd>{{getReadableDate(new Date(measurement.date))}}</BTd>
         <BTd class="actionTd">
           <button class="deleteButton" @click="fitnessStore.deleteBodyCompositionMeasurements(measurement)">
             <IIcBaselineDelete class="deleteIcon"/>

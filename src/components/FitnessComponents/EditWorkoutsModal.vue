@@ -12,6 +12,11 @@ function getWorkoutType(type) {
       return "Gym"
   }
 }
+
+function getReadableDate(date) {
+  let options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleString('en-US', options)
+}
 </script>
 
 <template>
@@ -30,8 +35,8 @@ function getWorkoutType(type) {
     </BTr>
   </BThead>
   <BTbody>
-    <BTr v-for="workout in fitnessStore.workouts.reverse()" :key="workout.id">
-      <BTd>{{workout.date}}</BTd>
+    <BTr v-for="workout in fitnessStore.workouts" :key="workout.id">
+      <BTd>{{getReadableDate(new Date(workout.date))}}</BTd>
       <BTd>{{ getWorkoutType(workout.type) }}</BTd>
       <BTd class="actionTd">
         <button class="deleteButton" @click="fitnessStore.deleteWorkout(workout)">

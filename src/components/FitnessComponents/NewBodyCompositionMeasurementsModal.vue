@@ -28,11 +28,19 @@ async function newBodyCompositionMeasurements() {
 
 <template>
   <form class="newBodyCompositionMeasurementsForm">
-    <b-form-input :type="'number'" v-model="bodyCompositionMeasurements.bodyWeight" placeholder="Body Weight (Kg)"/>
-    <b-form-input :type="'number'" v-model="bodyCompositionMeasurements.bodyWater" placeholder="Body Water (L)"/>
-    <b-form-input :type="'number'" v-model="bodyCompositionMeasurements.bodyFat" placeholder="Body Fat (Kg)"/>
-    <b-form-input :type="'number'" v-model="bodyCompositionMeasurements.muscleMass" placeholder="Muscle Mass (Kg)"/>
-    <b-form-group label="Date" label-for="bodyCompositionMeasurementsDatePicker" label-cols="auto">
+    <b-form-group label="Weight (Kg)" label-for="newWeight" label-cols="4">
+      <b-form-input id="newWeight" :type="'number'" v-model="bodyCompositionMeasurements.bodyWeight" placeholder="Body Weight (Kg)"/>
+    </b-form-group>
+    <b-form-group label="Body Water (L)" label-for="newWater" label-cols="4">
+      <b-form-input id="newWater" :type="'number'" v-model="bodyCompositionMeasurements.bodyWater" placeholder="Body Water (L)"/>
+    </b-form-group>
+    <b-form-group label="Body Fat (Kg)" label-for="newBodyFat" label-cols="4">
+      <b-form-input id="newBodyFat" :type="'number'" v-model="bodyCompositionMeasurements.bodyFat" placeholder="Body Fat (Kg)"/>
+    </b-form-group>
+    <b-form-group label="Muscle Mass (Kg)" label-for="newMuscleMass" label-cols="4">
+      <b-form-input id="newMuscleMass" :type="'number'" v-model="bodyCompositionMeasurements.muscleMass" placeholder="Muscle Mass (Kg)"/>
+    </b-form-group>
+    <b-form-group label="Date" label-for="bodyCompositionMeasurementsDatePicker" label-cols="4">
       <VueDatePicker id="bodyCompositionMeasurementsDatePicker"
                      v-model="bodyCompositionMeasurements.date"
                      auto-apply

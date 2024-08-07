@@ -7,6 +7,7 @@ import NewBodyCompositionMeasurementsModal
   from "@/components/FitnessComponents/NewBodyCompositionMeasurementsModal.vue";
 import EditBodyCompositionMeasurementsModal
   from "@/components/FitnessComponents/EditBodyCompositionMeasurementsModal.vue";
+import LineChart from "@/components/FitnessComponents/Charts/LineChart.vue";
 
 const newWorkoutModal = ref(false)
 const editWorkoutsModal = ref(false)
@@ -24,6 +25,7 @@ function tooltip(value) {
 }
 
 const workouts = ref([])
+const isDataLoaded = ref(false);
 
 let fitnessStore = useFitnessStore();
 onMounted(async () => {
@@ -34,6 +36,7 @@ onMounted(async () => {
     const date = new Date(workout.date)
     return {date: new Date( date.getTime() - date.getTimezoneOffset() * -60000 ), count: workout.type}
   })
+  isDataLoaded.value = true;
 });
 </script>
 
@@ -68,11 +71,7 @@ onMounted(async () => {
           </button>
         </div>
       </div>
-      <ul>
-        <li v-for="measurement in fitnessStore.bodyCompositionMeasurements" :key="measurement.id">
-          {{ measurement.bodyFat }}
-        </li>
-      </ul>
+      <LineChart v-if="isDataLoaded" :measurements="fitnessStore.bodyCompositionMeasurements"/>
     </div>
   </div>
   <BModal :hide-footer="true"
