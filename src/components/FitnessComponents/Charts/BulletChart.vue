@@ -2,13 +2,38 @@
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import {ref} from "vue";
 ChartJS.register(Title, BarElement, CategoryScale, LinearScale)
-const measurements = {
-  min: 30,
-  max: 45,
-  value: 35,
-  label: "Muscle Mass"
-}
+
+const props = defineProps(['measurements', 'parameters'])
+const measurementsData = ref([
+  {
+    label: "Weight (Kg)",
+    value: props.measurements.bodyWeight,
+    min: props.parameters.lowerBodyWeight,
+    max: props.parameters.higherBodyWeight
+  },
+  {
+    label: "Water (L)",
+    value: props.measurements.bodyWater,
+    min: props.parameters.lowerBodyWater,
+    max: props.parameters.higherBodyWater
+  },
+  {
+    label: "Muscle Mass (Kg)",
+    value: props.measurements.muscleMass,
+    min: props.parameters.lowerMuscleMass,
+    max: props.parameters.higherMuscleMass
+  },
+  {
+    label: "Body Fat (Kg)",
+    value: props.measurements.bodyFat,
+    min: props.parameters.lowerBodyFat,
+    max: props.parameters.higherBodyFat
+  }
+])
+const allValues = measurementsData.value.flatMap(obj => [obj.value, obj.max]);
+const maxValue = Math.max(...allValues);
 const options = {
   responsive: true,
   indexAxis: 'x',
@@ -19,7 +44,7 @@ const options = {
       display: false
     },
     y: {
-      max: Math.ceil(Math.max(measurements.max, measurements.value)/10)*10 + 10
+      max: Math.ceil(maxValue/10)*10 + 10
     }
   },
   barThickness: 90,
@@ -34,10 +59,10 @@ const options = {
   },
   events: null,
 };
-const data = {
+const chartData = {
   datasets: [
       {
-        data: [measurements.value],
+        data: measurementsData.value.map(value => value.value),
         backgroundColor: '#404040',
         xAxisID: 'x2',
         barThickness: 30,
@@ -49,14 +74,14 @@ const data = {
         }
       },
     {
-      data: [measurements.min],
+      data: measurementsData.value.map(value => value.min),
       stack: '1',
       backgroundColor: '#8f4444',
       datalabels: {
         display: false
       }
     }, {
-      data: [measurements.max - measurements.min],
+      data: measurementsData.value.map(value => value.max - value.min),
       stack: '1',
       backgroundColor: '#4b8f44',
       datalabels: {
@@ -64,14 +89,14 @@ const data = {
       }
     },
   ],
-  labels: [measurements.label]
+  labels: measurementsData.value.map(value => value.label)
 }
 
 </script>
 
 <template>
   <Bar :options="options"
-       :data="data"
+       :data="chartData"
        :plugins="[ChartDataLabels]"
   />
 </template>

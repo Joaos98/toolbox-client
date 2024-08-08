@@ -18,9 +18,9 @@ const options = {
       time: {
         unit: "day",
         displayFormats: {
-          day: 'MMM dd, yyyy'
+          day: 'MMM yy'
         },
-        tooltipFormat: "MMM dd, yyyy"
+        tooltipFormat: "MMM yy"
       },
       ticks: {
         source: "data"

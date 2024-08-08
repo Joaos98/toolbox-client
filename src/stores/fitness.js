@@ -50,6 +50,7 @@ export const useFitnessStore = defineStore('fitness', () => {
 
     async function getUserMeasurementParameters() {
         userMeasurementParameters.value = await FitnessService.getUserMeasurementParameters()
+        userMeasurementParameters.value = userMeasurementParameters.value[0]
     }
 
     return {

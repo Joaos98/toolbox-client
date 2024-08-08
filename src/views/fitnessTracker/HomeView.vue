@@ -73,8 +73,15 @@ onMounted(async () => {
         </div>
       </div>
       <div class="charts">
-        <LineChart class="chart" v-if="isDataLoaded" :measurements="fitnessStore.bodyCompositionMeasurements"/>
-        <BulletChart class="chart" />
+        <LineChart class="chart"
+                   v-if="isDataLoaded"
+                   :measurements="fitnessStore.bodyCompositionMeasurements"
+        />
+        <BulletChart class="chart"
+                     v-if="isDataLoaded"
+                     :measurements="fitnessStore.bodyCompositionMeasurements[0]"
+                     :parameters="fitnessStore.userMeasurementParameters"
+        />
       </div>
     </div>
   </div>
