@@ -1,9 +1,9 @@
 <script setup>
 import { Line } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement, TimeScale } from 'chart.js'
+import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, LinearScale, PointElement, TimeScale } from 'chart.js'
 import 'chartjs-adapter-date-fns';
 import {ref, defineProps} from "vue";
-ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement, TimeScale)
+ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, PointElement, TimeScale)
 
 const props = defineProps(["measurements"])
 const options = {
@@ -31,6 +31,12 @@ const options = {
         display: true,
         text: "Kg"
       }
+    }
+  },
+  plugins: {
+    title: {
+      display: true,
+      text: "Evolution"
     }
   }
 }

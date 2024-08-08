@@ -8,6 +8,7 @@ import NewBodyCompositionMeasurementsModal
 import EditBodyCompositionMeasurementsModal
   from "@/components/FitnessComponents/EditBodyCompositionMeasurementsModal.vue";
 import LineChart from "@/components/FitnessComponents/Charts/LineChart.vue";
+import BulletChart from "@/components/FitnessComponents/Charts/BulletChart.vue";
 
 const newWorkoutModal = ref(false)
 const editWorkoutsModal = ref(false)
@@ -71,7 +72,10 @@ onMounted(async () => {
           </button>
         </div>
       </div>
-      <LineChart v-if="isDataLoaded" :measurements="fitnessStore.bodyCompositionMeasurements"/>
+      <div class="charts">
+        <LineChart class="chart" v-if="isDataLoaded" :measurements="fitnessStore.bodyCompositionMeasurements"/>
+        <BulletChart class="chart" />
+      </div>
     </div>
   </div>
   <BModal :hide-footer="true"
@@ -103,6 +107,16 @@ onMounted(async () => {
   flex-direction: row;
   color: white;
   margin-bottom: 30px;
+
+  .charts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .chart {
+
+    }
+  }
 
   h3 {
     color: var(--secondary-color);

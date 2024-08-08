@@ -18,6 +18,7 @@ declare module 'vue' {
     BTh: typeof import('bootstrap-vue-next')['BTh']
     BThead: typeof import('bootstrap-vue-next')['BThead']
     BTr: typeof import('bootstrap-vue-next')['BTr']
+    BulletChart: typeof import('./src/components/FitnessComponents/Charts/BulletChart.vue')['default']
     EditBodyCompositionMeasurementsModal: typeof import('./src/components/FitnessComponents/EditBodyCompositionMeasurementsModal.vue')['default']
     EditWorkoutsModal: typeof import('./src/components/FitnessComponents/EditWorkoutsModal.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
